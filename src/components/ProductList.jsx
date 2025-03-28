@@ -17,13 +17,17 @@ const ProductList = () => {
   }, [])
 
   const handlerCreateProduct = (data) => {
-    api().post((`${url}/`), {
-      "title": data.name,
-      "price": data.price,
-      "description": data.description,
-      "categoryId": 1,
-      "images": ["https://placehold.co/200x200"]
-    })
+    console.log("data llega form: ", data)
+
+    console.log("agregar datos: ", data)
+    api().post((url), {
+      body: {
+        ...data,
+        price: Number(data.price),
+        categoryId: 1,
+        images: ["https://placehold.co/200x200"]
+      }
+    }).then((res) => console.log("Res platzi: ",res))
   }
 
   const handlerUpdateProduct = (data) => {
@@ -46,16 +50,14 @@ const ProductList = () => {
   return (
     <>
       <h2>Create product</h2>
-      <ProductForm handlerCreateProduct/>
+      <ProductForm handlerCreateProduct={handlerCreateProduct} />
 
 
       <h2>Product list</h2>
       {(products !== null) && products.map((product) => (
         <ProductCard
           key={product.id}
-          imgSrc={product.images[0]}
-          title={product.title}
-          price={product.price}
+          product = {product}
           updateProduct={handlerUpdateProduct}
           deleteProduct={handlerDeleteProduct}
         />

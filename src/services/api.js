@@ -2,7 +2,8 @@ export default function api() {
 
   const customFetch = (endpoint, options = {}) => {
     const defaultHeader = {
-      accept: "application/json"
+      accept: "application/json",
+      "Content-Type": "application/json"
     }
 
     //Configurar el abortar peticion
@@ -18,14 +19,15 @@ export default function api() {
       : defaultHeader
 
     //Covertir contenido del body a json 
-    options.body = JSON.stringify(options.body) || false;
-    if (!options.body) delete options.body
+    // options.body = JSON.stringify(options.body) || false;
+    // if (!options.body) delete options.body
+    if(options.body) options.body = JSON.stringify(options.body)
 
 
     console.log(options)
 
     //Cancela la petición si el servidor se demora en responder
-    setTimeout(() => controller.abort(), 4000)
+    setTimeout(() => controller.abort(), 20000)
 
     return fetch(endpoint, options)
       .then((res) => {

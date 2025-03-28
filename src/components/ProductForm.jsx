@@ -28,8 +28,6 @@ const ProductForm = ({handlerCreateProduct}) => {
     //validar campos completos
     if(!form.title || form.price === 0 || !form.description) alert("No se pueden dejar campos vacios")
 
-    form.price = Number(form.price)
-
     if(form.title && form.price && form.description) handlerCreateProduct(form)
 
     console.log("form", form)
@@ -45,7 +43,7 @@ const ProductForm = ({handlerCreateProduct}) => {
         <input type="number" name="price" id="price" min="1" value={form.price} onChange={handlerChange}/>
         <label htmlFor="description">Description</label>
         <input type="text" name="description" id="description" value={form.description} onChange={handlerChange}/>
-        <input type="submit" value="Create" onSubmit={handlerSubmit}/>
+        <input type="submit" value="Create"/>
       </form>
 
     </>
