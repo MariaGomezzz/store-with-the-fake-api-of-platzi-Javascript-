@@ -8,12 +8,14 @@ const ProductList = () => {
   const [products, setProducts] = useState(null)
 
   const url = "https://api.escuelajs.co/api/v1/products"
-  const getProducts = "?offset=0&limit=10"
+  // const getProducts = "?offset=0&limit=10"
+  const getProducts = "?offset=0&limit=2"
 
   // let api = 
 
   useEffect(() => {
-    api().get(`${url}/${getProducts}`).then((res) => setProducts(res))
+    // api().get(`${url}/${getProducts}`).then((res) => setProducts(res))
+    api().get(`${url}/`).then((res) => setProducts(res))
   }, [])
 
   const handlerCreateProduct = (data) => {
@@ -27,7 +29,7 @@ const ProductList = () => {
         categoryId: 1,
         images: ["https://placehold.co/200x200"]
       }
-    }).then((res) => console.log("Res platzi: ",res))
+    }).then((res) => console.log("Res platzi: ", res))
   }
 
   const handlerUpdateProduct = (data) => {
@@ -49,20 +51,26 @@ const ProductList = () => {
   console.log(products)
   return (
     <>
-      <h2>Create product</h2>
-      <ProductForm handlerCreateProduct={handlerCreateProduct} />
+      <div className='flex'>
+        <div>
+          <h2>Create product</h2>
+          <ProductForm handlerCreateProduct={handlerCreateProduct} />
+        </div>
 
-
-      <h2>Product list</h2>
-      {(products !== null) && products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product = {product}
-          updateProduct={handlerUpdateProduct}
-          deleteProduct={handlerDeleteProduct}
-        />
-      ))}
-
+        <div className='grow'>
+          <h2>Product list</h2>
+          <div className='flex flex-wrap'>
+            {(products !== null) && products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                updateProduct={handlerUpdateProduct}
+                deleteProduct={handlerDeleteProduct}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   )
 }

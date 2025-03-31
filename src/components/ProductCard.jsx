@@ -1,26 +1,27 @@
 import React from 'react'
-import Button from './Button'
 
-const ProductCard = ({product, deleteProduct, updateProduct}) => {
-const {id, images, title, price} = product
+
+const ProductCard = ({ product, deleteProduct, updateProduct }) => {
+  const { id, images, title, price } = product
   return (
     <>
-      <img 
-      src={images[0]} 
-      alt={title} 
-      style={{width : "200px", height: "200px"}} 
-      />
-      <div>
-        <p>{title}</p>
-        <p>{price}</p>
-      </div>
-      <div>
-        {/* <Button action={"Edit"} handler={updateProduct}/>
-        <Button action={"Delete"} handler={deleteProduct}/> */}
+      <div className={"drop-shadow-xl rounded-xl bg-white w-60 flex flex-col justify-center p-4 m-5"}>
+        <img
+        className='m-auto'
+          src={images[0]}
+          alt={title}
+          style={{ width: "190px", height: "190px" }}
+        />
 
-        <button type="button" onClick={() => updateProduct(product)}> Edit</button>
-        <button type="button" onClick={() => deleteProduct(id)}> Delete</button>
-        
+        <div className='w-en m-6 text-start'>
+          <p>{title}</p>
+          <p className='mt-3'>$ {price}</p>
+        </div>
+
+        <div className='flex justify-around'>
+          <button className={"bg-blue-500 p-2 w-18 rounded-xl"} type="button" onClick={() => updateProduct(product)}> Edit</button>
+          <button className={"bg-blue-500 p-2 w-18 rounded-xl"} type="button" onClick={() => deleteProduct(id)}> Delete</button>
+        </div>
       </div>
     </>
   )
